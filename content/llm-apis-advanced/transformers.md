@@ -17,7 +17,7 @@ The `from_pretrained("org/model")` call downloads the weights from the Hub (cach
 
 Practical realities:
 - **Hardware matters.** A 7B-parameter model needs ~14GB in full precision; you use **quantization** (4-bit/8-bit) and `device_map="auto"` to fit smaller GPUs. Big models need a real GPU.
-- **Chat models use a chat template.** `tokenizer.apply_chat_template(messages, ...)` formats your [messages array](messages-roles.md) into the exact special-token layout that model was trained on — skip it and quality tanks.
+- **Chat models use a chat template.** `tokenizer.apply_chat_template(messages, ...)` formats your [messages array](/working-with-llm-apis/messages-roles) into the exact special-token layout that model was trained on — skip it and quality tanks.
 - For quick tasks you don't wire this by hand — you use [pipelines](pipelines.md), a one-liner wrapper over the same objects.
 
 <div class="diagram">

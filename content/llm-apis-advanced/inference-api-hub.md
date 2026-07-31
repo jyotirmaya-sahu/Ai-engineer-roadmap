@@ -51,7 +51,7 @@ vec = client.feature_extraction("cheap flat near the metro",
 print(len(vec))   # -> the embedding dimensionality
 ```
 
-Note the `chat_completion` shape mirrors the OpenAI [messages](messages-roles.md) format — the ecosystem has largely standardized on it, so switching between providers is mostly a client swap.
+Note the `chat_completion` shape mirrors the OpenAI [messages](/working-with-llm-apis/messages-roles) format — the ecosystem has largely standardized on it, so switching between providers is mostly a client swap.
 
 ## How a company uses this
 

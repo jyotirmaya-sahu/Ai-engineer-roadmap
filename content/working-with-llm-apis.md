@@ -27,30 +27,18 @@ This is the layer interviewers assume you've *actually used*, not just read abou
 
 | Tile | Core idea | Reach for it when |
 |---|---|---|
+| [SDK setup & call pattern](working-with-llm-apis/sdk-setup-call-pattern.md) | install, client, `client.chat.completions.create`, read the response | **start here** — before any other tile |
 | [Messages & roles](working-with-llm-apis/messages-roles.md) | the request is a list of role-tagged messages | every single API call |
 | [System / user / assistant](working-with-llm-apis/system-user-assistant.md) | the three roles and what each controls | steering behavior, multi-turn chat |
 | [Streaming](working-with-llm-apis/streaming.md) | get tokens as they're generated | chat UIs, low perceived latency |
 | [Usage & token counting](working-with-llm-apis/usage-token-counting.md) | tokens = your bill and your context limit | budgeting, staying under context window |
 | [JSON mode](working-with-llm-apis/json-mode.md) | force machine-parseable output | feeding model output to code |
-| [Function / tool schemas](working-with-llm-apis/function-tool-schemas.md) | let the model call your functions | agents, live data, actions |
-| [Vision inputs](working-with-llm-apis/vision-inputs.md) | send images alongside text | document/image understanding |
-| [Audio](working-with-llm-apis/audio.md) | speech in and out | voice apps, transcription |
-| [Embeddings API](working-with-llm-apis/embeddings-api.md) | text → vector for search | RAG, semantic search, clustering |
-| [Batch API](working-with-llm-apis/batch-api.md) | bulk jobs at ~50% cost, async | large offline workloads |
-| [Files API](working-with-llm-apis/files-api.md) | upload docs/images once, reference by ID | batch, vision, large attachments |
-| [SSE streaming](working-with-llm-apis/sse-streaming.md) | the wire protocol behind streaming | debugging streams, custom clients |
-| [transformers](working-with-llm-apis/transformers.md) | run open models locally in Python | self-hosting, no per-token cost |
-| [pipelines](working-with-llm-apis/pipelines.md) | one-line task API over transformers | quick prototypes, classic NLP tasks |
-| [tokenizers](working-with-llm-apis/tokenizers.md) | text ↔ token IDs, fast | exact token counts, custom preprocessing |
-| [Inference API & Hub](working-with-llm-apis/inference-api-hub.md) | hosted open models + model registry | trying open models without GPUs |
-| [Rate limits](working-with-llm-apis/rate-limits.md) | providers cap your RPM/TPM | scaling past a demo |
-| [Retries & backoff](working-with-llm-apis/retries-backoff.md) | retry transient failures politely | any production call path |
-| [Async batching](working-with-llm-apis/async-batching.md) | fire many calls concurrently | high throughput without Batch API delay |
-| [Prompt caching](working-with-llm-apis/prompt-caching.md) | reuse a cached prefix for ~10% cost | long stable system prompts, RAG contexts |
+
+After JSON mode you're ready to **build the capstone app (v1–v5)**. The rest of the API surface — tool-calling, vision, audio, other endpoints, Hugging Face, and production concerns (rate limits, retries, caching) — lives in the next node, **LLM APIs — Advanced**, to pull in as your app needs them.
 
 ## Real world: how a company uses this
 
-> **A Dubai insurance firm** builds a claims-triage assistant. Each claim submission arrives with a **PDF and a photo of the damage** ([Files API](working-with-llm-apis/files-api.md) + [Vision inputs](working-with-llm-apis/vision-inputs.md)), the model must return a **strict JSON verdict** ([JSON mode](working-with-llm-apis/json-mode.md)) and may **call a policy-lookup function** ([Function / tool schemas](working-with-llm-apis/function-tool-schemas.md)). The agent-facing UI **streams** the explanation so it feels instant ([Streaming](working-with-llm-apis/streaming.md)). The long, unchanging system prompt with all the underwriting rules is **prompt-cached** to cut cost 90% ([Prompt caching](working-with-llm-apis/prompt-caching.md)). At 20k claims/day they hit **rate limits**, so calls go through **exponential backoff** and an **async concurrency pool** ([Rate limits](working-with-llm-apis/rate-limits.md), [Retries & backoff](working-with-llm-apis/retries-backoff.md), [Async batching](working-with-llm-apis/async-batching.md)); the nightly re-scoring of the historical archive runs through the **Batch API** at half price. Every tile in this node shows up in one real product.
+> **A Dubai insurance firm** builds a claims-triage assistant. The model must return a **strict JSON verdict** ([JSON mode](working-with-llm-apis/json-mode.md)) over a conversation it holds as a **role-tagged message list** ([Messages & roles](working-with-llm-apis/messages-roles.md)), the agent-facing UI **streams** the explanation so it feels instant ([Streaming](working-with-llm-apis/streaming.md)), and every call is **token-counted** to stay in budget and under the context window ([Usage & token counting](working-with-llm-apis/usage-token-counting.md)). The advanced pieces it also uses — vision, tool-calling, prompt caching, rate-limit handling — are covered in the **LLM APIs — Advanced** node.
 
 ## Interview tip
 Say: *"An LLM API call is a structured list of role-tagged messages sent over HTTPS, billed per token, returning streamable output. My mental checklist for any integration is: shape the messages, decide if I need structured output or tool-calling, count tokens to stay in budget and under the context limit, stream for UX, then harden it with retries, backoff, rate-limit handling, and prompt caching for cost."* That single sentence signals you've actually shipped against these APIs, not just read the marketing page.

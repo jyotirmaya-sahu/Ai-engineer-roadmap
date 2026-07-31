@@ -16,7 +16,7 @@ The full loop, step by step:
 4. **You execute the function** in your own code with those arguments.
 5. **You append the result** as a `tool` message and resend. The model reads the result and produces a final natural-language answer (or another tool call).
 
-The model can call **multiple tools in parallel**, or none. The schema is doing double duty: the `description` fields *teach* the model, and the parameter schema *constrains* the arguments (same constrained-decoding idea as [JSON mode](json-mode.md)).
+The model can call **multiple tools in parallel**, or none. The schema is doing double duty: the `description` fields *teach* the model, and the parameter schema *constrains* the arguments (same constrained-decoding idea as [JSON mode](/working-with-llm-apis/json-mode)).
 
 <div class="diagram">
   <div class="flow v">

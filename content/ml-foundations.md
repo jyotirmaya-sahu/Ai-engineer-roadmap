@@ -31,6 +31,7 @@ Three concrete payoffs:
 
 | Tile | Core idea | When it comes up |
 |---|---|---|
+| **[What is machine learning?](ml-foundations/what-is-machine-learning.md)** | examples instead of rules + all the jargon | **start here** — the base every tile below assumes |
 | **[Supervised vs unsupervised](ml-foundations/supervised-vs-unsupervised.md)** | learn from labels vs find structure | first thing anyone asks about a problem |
 | **[Train / validation / test](ml-foundations/train-validation-test.md)** | three data splits, three jobs | any honest evaluation, incl. LLM evals |
 | **[Features & labels](ml-foundations/features-labels.md)** | inputs (X) and the answer (y) | framing any prediction task |

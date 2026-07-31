@@ -4,7 +4,7 @@
 
 ## Why it matters for an AI Engineer
 
-Two of the most common production problems are *"this request costs too much"* and *"context length exceeded."* Both are token problems. If you can't estimate tokens *before* you send, you can't budget, you can't guarantee a prompt fits the context window, and you can't decide how much history or how many retrieved chunks to include. Token counting underlies cost dashboards, [prompt caching](prompt-caching.md) decisions, chunk-size tuning in RAG, and truncation logic in long chats. It's a skill interviewers probe directly: "How would you keep a 100-turn conversation from overflowing the context window?"
+Two of the most common production problems are *"this request costs too much"* and *"context length exceeded."* Both are token problems. If you can't estimate tokens *before* you send, you can't budget, you can't guarantee a prompt fits the context window, and you can't decide how much history or how many retrieved chunks to include. Token counting underlies cost dashboards, [prompt caching](/llm-apis-advanced/prompt-caching) decisions, chunk-size tuning in RAG, and truncation logic in long chats. It's a skill interviewers probe directly: "How would you keep a 100-turn conversation from overflowing the context window?"
 
 ## The mechanism — how it works
 
@@ -19,7 +19,7 @@ Two limits use these:
 1. **Context window** — the max input+output the model can handle in one call (e.g. 128k, 200k, or 1M tokens depending on model). Exceed it → hard error.
 2. **Cost** — `input_tokens × input_price + output_tokens × output_price`, priced per million tokens.
 
-To count *before* sending, use the model's tokenizer offline: OpenAI's `tiktoken`, or Hugging Face [tokenizers](tokenizers.md) for open models.
+To count *before* sending, use the model's tokenizer offline: OpenAI's `tiktoken`, or Hugging Face [tokenizers](/llm-apis-advanced/tokenizers) for open models.
 
 <div class="diagram">
   <div class="flow">
@@ -72,3 +72,23 @@ A Dubai legal-AI startup logs the `usage` object from *every* call into a dashbo
 
 ## Interview tip
 Say: *"Tokens are the unit of both billing and context limits — input and output are priced separately, output usually higher. I count with tiktoken or the model's tokenizer before sending to guarantee I fit the context window and to budget, and I log the returned usage object per feature. A rule of thumb is ~4 characters per token, but I never trust that for code or Arabic."* Naming the Arabic/code caveat is a nice Dubai-relevant tell.
+
+## Practice — assignments
+
+Write a program for each. Do them in order. You need `pip install openai tiktoken` and `OPENAI_API_KEY` set.
+
+1. Write a program that takes a sentence and, using the model's tokenizer offline, prints how many tokens it is and the list of individual token strings.
+
+2. Write a program that compares tokenization of three inputs — an English sentence, the same length of code, and an Arabic sentence — and prints the token count of each, showing that equal-length text isn't equal tokens.
+
+3. Write a program that estimates the cost of a request *before* sending it: given an input token count, an expected output token count, and per-million prices, print the dollar cost.
+
+4. Write a program that makes a real API call and prints the actual input, output, and total tokens from the response's usage object — then compare the input count to your offline estimate from assignment 1.
+
+5. Write a program that, given a piece of text and a model's context-window size, checks whether the text fits and prints a clean "fits" or "too large, please split" message instead of letting the API error.
+
+6. Write a program that runs a short multi-turn conversation and, after each turn, prints the running total of tokens used across all calls so far — showing how cost grows as history accumulates.
+
+7. (Stretch) Write a program that trims a long conversation so it stays under a token budget: keep the system message plus as many of the most recent turns as fit within, say, 1000 tokens, dropping the oldest.
+
+*Do 1–5 before moving to the next tile.*

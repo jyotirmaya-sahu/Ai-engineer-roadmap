@@ -8,7 +8,7 @@ A model generating 800 tokens might take 15–30 seconds end-to-end. If you wait
 
 ## The mechanism — how it works
 
-You add `stream=True` to the request. The connection stays open and the server pushes a sequence of small **chunks** over [Server-Sent Events](sse-streaming.md). Each chunk contains a *delta* — usually one token's worth of text — plus occasional metadata. Your code loops over the chunks and appends each delta to the growing string (and typically prints/renders it live). A final chunk signals completion; usage/token counts arrive at the end.
+You add `stream=True` to the request. The connection stays open and the server pushes a sequence of small **chunks** over [Server-Sent Events](/llm-apis-advanced/sse-streaming). Each chunk contains a *delta* — usually one token's worth of text — plus occasional metadata. Your code loops over the chunks and appends each delta to the growing string (and typically prints/renders it live). A final chunk signals completion; usage/token counts arrive at the end.
 
 Key facts:
 - Each chunk is tiny — you accumulate them yourself into the full message.
@@ -67,7 +67,27 @@ A Dubai airline's customer-service assistant streams every reply to the web widg
 - **Parsing partial JSON** from streamed tool calls or JSON mode before it's complete. Buffer, then parse.
 - **Ignoring the final usage chunk**, then having no token counts for cost tracking (see [Usage & token counting](usage-token-counting.md)).
 - **Blocking the event loop** — in a web server, stream asynchronously so one slow generation doesn't stall other requests.
-- **Forgetting error handling mid-stream** — the connection can drop after the first token; wrap the loop and be ready to retry (see [Retries & backoff](retries-backoff.md)).
+- **Forgetting error handling mid-stream** — the connection can drop after the first token; wrap the loop and be ready to retry (see [Retries & backoff](/llm-apis-advanced/retries-backoff)).
 
 ## Interview tip
 Say: *"Streaming doesn't make generation faster — it slashes *perceived* latency by delivering time-to-first-token in about half a second while the rest flows in. I accumulate the deltas, buffer partial tool-call JSON until valid, capture the final usage chunk for cost tracking, and wire abort to stop billing when a user cancels."* Mentioning TTFT and abort-to-save-cost signals real UI experience.
+
+## Practice — assignments
+
+Write a program for each. Do them in order. You need `pip install openai` and `OPENAI_API_KEY` set.
+
+1. Write a program that streams a reply to a long prompt and prints each piece as it arrives, so the text appears word-by-word in the terminal instead of all at once.
+
+2. Extend assignment 1 to also accumulate the streamed pieces into one complete string, and after the stream ends, print that full string again on its own.
+
+3. Write a program that measures and prints the time-to-first-token — how many seconds pass between sending the request and receiving the first non-empty piece.
+
+4. Write a program that streams a reply, and also captures and prints the total token count from the final chunk (you'll need to request usage in the stream).
+
+5. Write a program that streams a long reply but stops reading after the first 50 characters have arrived — closing the stream early — and prints only what it received. (Simulates a user hitting "stop".)
+
+6. Write a program that compares the two modes: request the same prompt once without streaming and once with streaming, and print how long until you had the first visible output in each case.
+
+7. (Stretch) Write a program that streams a reply and wraps the loop in error handling, so that if the connection drops mid-stream it prints what it received so far instead of crashing.
+
+*Do 1–4 before moving to the next tile.*

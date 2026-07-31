@@ -67,3 +67,23 @@ A Dubai fintech's support bot keeps a per-session `messages` array in Redis. Eac
 
 ## Interview tip
 Say: *"LLM chat APIs are stateless — the request is an ordered list of role-tagged messages, and 'conversation memory' is just me keeping that list and resending it each turn. That's also why cost grows with conversation length and why I truncate or summarize old turns."* It shows you understand the API's real shape, not just the SDK sugar.
+
+## Practice — assignments
+
+Write a program for each. Do them in order. You need `pip install openai` and `OPENAI_API_KEY` set.
+
+1. Write a program that sends a single-message conversation (one `user` message) asking any question, and prints the reply.
+
+2. Write a program that sends a two-message conversation — a `system` message telling the model to always answer like a pirate, plus a `user` question — and prints the reply. Confirm the persona changed the style.
+
+3. Write a program that asks the model a question, then asks a follow-up that only makes sense if it remembers the first answer (e.g. "What's the capital of France?" then "What's the population of that city?"). Make it answer the follow-up correctly by appending the reply and resending the whole list.
+
+4. Write a program that runs an interactive chat loop in the terminal: read the user's input, append it as a `user` message, call the API, print and append the `assistant` reply, and repeat until the user types "quit". Memory must persist across turns.
+
+5. Extend assignment 4 so that before each call, if the conversation has more than 10 messages, it keeps only the system message plus the most recent 8 messages. Verify the bot still works but "forgets" the oldest turns.
+
+6. Write a program that demonstrates statelessness: make two *separate* API calls (two independent messages lists) where the second references something from the first, and show that the model does NOT remember it. Then fix it by combining them into one list.
+
+7. Write a program that builds a conversation which ends on an `assistant` message you wrote yourself (a "prefill" that starts the answer), and observe how the model continues from your text instead of starting fresh.
+
+*Do 1–4 before moving to the next tile.*

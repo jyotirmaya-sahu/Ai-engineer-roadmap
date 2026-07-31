@@ -4,7 +4,7 @@
 
 ## Why it matters for an AI Engineer
 
-A huge amount of real business data isn't clean text — it's scanned invoices, ID cards, damage photos, screenshots, receipts, whiteboard pictures, and PDFs full of tables. Vision-capable models let you skip the old, brittle OCR-plus-rules pipeline and just *ask the model what's in the image*. For an AI Engineer this unlocks document-understanding, visual QA, and multimodal RAG. In Dubai specifically — where documents mix Arabic and English and arrive as phone photos — a model that reads images directly is enormously practical. Interviewers increasingly expect you to know that "multimodal" isn't a special product; it's just another content block in the same [messages array](messages-roles.md).
+A huge amount of real business data isn't clean text — it's scanned invoices, ID cards, damage photos, screenshots, receipts, whiteboard pictures, and PDFs full of tables. Vision-capable models let you skip the old, brittle OCR-plus-rules pipeline and just *ask the model what's in the image*. For an AI Engineer this unlocks document-understanding, visual QA, and multimodal RAG. In Dubai specifically — where documents mix Arabic and English and arrive as phone photos — a model that reads images directly is enormously practical. Interviewers increasingly expect you to know that "multimodal" isn't a special product; it's just another content block in the same [messages array](/working-with-llm-apis/messages-roles).
 
 ## The mechanism — how it works
 
@@ -13,7 +13,7 @@ An image is just another **content part** inside a user message. Instead of `con
 - **URL** — a link the provider fetches.
 - **Base64 data URL** — you read the file, base64-encode it, and inline it (needed for private/local images).
 
-Under the hood the model **tokenizes the image into visual tokens** — a tiled grid whose count depends on resolution. This matters for cost: a high-res image can cost as much as *hundreds to a couple thousand* input tokens (see [Usage & token counting](usage-token-counting.md)). Most APIs let you pick a **detail level** (`low` = cheap, fixed small token cost; `high` = more tiles, better for fine text). You can send **multiple images** in one message (e.g. front and back of an ID).
+Under the hood the model **tokenizes the image into visual tokens** — a tiled grid whose count depends on resolution. This matters for cost: a high-res image can cost as much as *hundreds to a couple thousand* input tokens (see [Usage & token counting](/working-with-llm-apis/usage-token-counting)). Most APIs let you pick a **detail level** (`low` = cheap, fixed small token cost; `high` = more tiles, better for fine text). You can send **multiple images** in one message (e.g. front and back of an ID).
 
 What it's great at: reading text in images (OCR-like), describing scenes, extracting structured data from documents, reasoning about charts. What it's weak at: precise pixel coordinates, tiny dense text at low detail, and counting many small objects.
 
@@ -57,7 +57,7 @@ Anthropic uses the same idea with an `image` content block carrying `source: {ty
 
 ## How a company uses this
 
-A Dubai logistics company processes thousands of **proof-of-delivery photos** and handwritten delivery notes daily. **Production reality:** they send each photo with a prompt asking for `{recipient_name, timestamp, signature_present}` as structured output, replacing a fragile OCR + template pipeline that failed on rotated or low-light phone photos. Costs are controlled by using `detail: "low"` for simple presence checks and `high` only when reading handwritten text. They pre-resize images to ~1024px on the long edge before sending — larger images cost more visual tokens with no accuracy gain — and combine vision with [JSON mode](json-mode.md) so results drop straight into their database.
+A Dubai logistics company processes thousands of **proof-of-delivery photos** and handwritten delivery notes daily. **Production reality:** they send each photo with a prompt asking for `{recipient_name, timestamp, signature_present}` as structured output, replacing a fragile OCR + template pipeline that failed on rotated or low-light phone photos. Costs are controlled by using `detail: "low"` for simple presence checks and `high` only when reading handwritten text. They pre-resize images to ~1024px on the long edge before sending — larger images cost more visual tokens with no accuracy gain — and combine vision with [JSON mode](/working-with-llm-apis/json-mode) so results drop straight into their database.
 
 ## Common mistakes
 

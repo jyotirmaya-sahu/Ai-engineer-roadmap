@@ -1,6 +1,6 @@
 # SSE streaming
 
-**What it is:** **Server-Sent Events (SSE)** is the actual wire protocol underneath [streaming](streaming.md) — a simple, one-way, text-over-HTTP format where the server keeps the connection open and pushes a series of `data:` lines. It's *how* those token chunks physically arrive.
+**What it is:** **Server-Sent Events (SSE)** is the actual wire protocol underneath [streaming](/working-with-llm-apis/streaming) — a simple, one-way, text-over-HTTP format where the server keeps the connection open and pushes a series of `data:` lines. It's *how* those token chunks physically arrive.
 
 ## Why it matters for an AI Engineer
 

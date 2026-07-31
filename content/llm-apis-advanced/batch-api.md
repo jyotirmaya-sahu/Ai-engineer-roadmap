@@ -16,7 +16,7 @@ Batch is **file-based and asynchronous**:
 4. **Poll** the job's status — it moves `validating → in_progress → completed` (or `failed`). You do *not* hold a connection open; you check back later.
 5. **Download the output file** — a JSONL where each line has your `custom_id` and that request's response. Errors come in a separate error file.
 
-Trade-offs vs synchronous calls: **cheaper (~50%)** and **higher throughput** (its own large quota), but **not instant** — results arrive within the window (often much sooner, but no guarantee). It's the opposite end of the spectrum from [streaming](streaming.md).
+Trade-offs vs synchronous calls: **cheaper (~50%)** and **higher throughput** (its own large quota), but **not instant** — results arrive within the window (often much sooner, but no guarantee). It's the opposite end of the spectrum from [streaming](/working-with-llm-apis/streaming).
 
 <div class="diagram">
   <div class="flow">

@@ -31,7 +31,7 @@ export const roadmap: Entry[] = [
 
   { sec: "Phase 2 · How LLMs Work" },
   { node: "ML Foundations", tag: "theory · light", lead: "Just enough to talk theory in interviews", groups: [
-    { h: "Learning basics", tiles: ["Supervised vs unsupervised", "Train / validation / test", "Features & labels", { t: "Loss functions", cls: "" as any }] },
+    { h: "Learning basics", tiles: ["What is machine learning?", "Supervised vs unsupervised", "Train / validation / test", "Features & labels", { t: "Loss functions", cls: "" as any }] },
     { h: "Neural nets", tiles: ["Neurons & layers", "Activation functions", "Forward pass", "Gradient descent", { t: "Backprop (concept)", cls: "full" }] },
     { h: "Generalization", tiles: ["Overfitting / underfitting", "Regularization", { t: "Bias-variance", cls: "full" }] },
   ] },
@@ -41,21 +41,28 @@ export const roadmap: Entry[] = [
     { h: "Attention", tiles: ["Self-attention", "Query / Key / Value", "Multi-head", "Positional encoding", { t: "Context window", cls: "full" }] },
     { h: "Training lifecycle", tiles: ["Pre-training", "Supervised fine-tune (SFT)", "RLHF", "DPO", { t: "Instruction tuning", cls: "full" }] },
   ] },
+  { node: "Working with LLM APIs", tag: "hands-on", lead: "Talk to models in code — learn this BEFORE tuning knobs", groups: [
+    { h: "Chat APIs", tiles: ["SDK setup & call pattern", "Messages & roles", "System / user / assistant", "Streaming", { t: "Usage & token counting", cls: "full" }] },
+    { h: "Structured output", tiles: ["JSON mode"] },
+  ] },
+  { node: "Build: The Capstone App", tag: "project · grows every phase", lead: "ONE real app you grow feature-by-feature as you learn — start with a basic call, add memory, streaming, cost, structure. Later phases turn it into RAG + agents.", groups: [
+    { h: "Part A · Grow it one feature at a time", tiles: ["v1 · Basic Q&A call", "v2 · Conversation memory", "v3 · Streaming + persona", "v4 · Token & cost tracking", "v5 · Structured output"] },
+    { h: "Part B · Make it multi-user & production-ready", tiles: ["v6 · Auth & per-user history", "v7 · Redis & concurrency", "v8 · Deploy to production"] },
+  ] },
   { node: "Sampling & Generation", tag: "hands-on", lead: "The knobs that control every output", groups: [
     { h: "Decoding parameters", tiles: ["Temperature", "Top-K", "Top-P (nucleus)", "Repetition penalty", "Max tokens", "Stop sequences", "Seed", { t: "Logprobs", cls: "full" }] },
+  ] },
+  { node: "LLM APIs — Advanced", tag: "hands-on", lead: "The rest of the API surface — reach for these as your app needs them", groups: [
+    { h: "Tools & multimodal", tiles: ["Function / tool schemas", "Vision inputs", "Audio"] },
+    { h: "Other endpoints", tiles: ["Embeddings API", "Batch API", "Files API", "SSE streaming"] },
+    { h: "Hugging Face", tiles: ["transformers", "pipelines", "tokenizers", { t: "Inference API & Hub", cls: "full" }] },
+    { h: "Production concerns", tiles: ["Rate limits", "Retries & backoff", "Async batching", { t: "Prompt caching", cls: "full" }] },
   ] },
   { node: "Model Landscape", tag: "decision", lead: "Which model, and why", groups: [
     { h: "Foundation models", tiles: ["Closed vs open", "Model sizes", "Context length", "Multimodal"] },
     { h: "Providers", tiles: ["Anthropic Claude", "OpenAI GPT", "Google Gemini", "Meta Llama", "Mistral", "Cohere", { t: "Falcon · Jais 🇦🇪", cls: "full" }] },
     { h: "Selection & cost", tiles: ["Capability vs task", "Latency", "Licensing", "Token pricing", "Cost estimation", { t: "Cost vs performance tradeoff", cls: "full" }] },
     { h: "Choosing at scale", tiles: ["Model routing / cascades", "Model tiering by task", { t: "Managed vs self-hosted (build vs buy)", cls: "full" }] },
-  ] },
-  { node: "Working with LLM APIs", tag: "hands-on", lead: "Talk to models in code", groups: [
-    { h: "Chat APIs", tiles: ["Messages & roles", "System / user / assistant", "Streaming", { t: "Usage & token counting", cls: "full" }] },
-    { h: "Structured & multimodal", tiles: ["JSON mode", "Function / tool schemas", "Vision inputs", "Audio"] },
-    { h: "Other endpoints", tiles: ["Embeddings API", "Batch API", "Files API", "SSE streaming"] },
-    { h: "Hugging Face", tiles: ["transformers", "pipelines", "tokenizers", { t: "Inference API & Hub", cls: "full" }] },
-    { h: "Production concerns", tiles: ["Rate limits", "Retries & backoff", "Async batching", { t: "Prompt caching", cls: "full" }] },
   ] },
 
   { sec: "Phase 3 · Prompt & Context" },

@@ -55,7 +55,7 @@ A Dubai HR-tech company's resume screener puts *all* the scoring rubric, legal f
 
 - **Weak or empty system prompt**, then wondering why the model won't hold format or persona.
 - **Trusting user content as instructions.** In RAG/agents, treat retrieved and user text as *data*, and say so in the system prompt.
-- **Overloading system with the whole task each turn** when it never changes — pair a stable system prompt with [prompt caching](prompt-caching.md) to stop paying to re-read it.
+- **Overloading system with the whole task each turn** when it never changes — pair a stable system prompt with [prompt caching](/llm-apis-advanced/prompt-caching) to stop paying to re-read it.
 - **Forgetting Anthropic's `system` is a top-level param**, not a message in the array.
 
 ## Interview tip

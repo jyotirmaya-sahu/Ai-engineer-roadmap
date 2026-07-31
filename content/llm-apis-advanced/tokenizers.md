@@ -4,7 +4,7 @@
 
 ## Why it matters for an AI Engineer
 
-Models don't read characters — they read token IDs, and *every* model has its own vocabulary. Tokenizers are where you get **exact** token counts (not the "~4 chars" guess from [Usage & token counting](usage-token-counting.md)), which drives cost, context-window budgeting, and [chunking](../chunking/sentence-token-based.md). They also explain surprising behavior: why a model "can't count letters" (it sees tokens, not letters), why Arabic and code cost more tokens, and why a prompt that fit yesterday overflows today after a model swap. Understanding tokenization is the difference between guessing at limits and *knowing* them.
+Models don't read characters — they read token IDs, and *every* model has its own vocabulary. Tokenizers are where you get **exact** token counts (not the "~4 chars" guess from [Usage & token counting](/working-with-llm-apis/usage-token-counting)), which drives cost, context-window budgeting, and [chunking](../chunking/sentence-token-based.md). They also explain surprising behavior: why a model "can't count letters" (it sees tokens, not letters), why Arabic and code cost more tokens, and why a prompt that fit yesterday overflows today after a model swap. Understanding tokenization is the difference between guessing at limits and *knowing* them.
 
 ## The mechanism — how it works
 

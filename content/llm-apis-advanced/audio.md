@@ -16,7 +16,7 @@ Three capabilities:
 
 **3. Speech-to-speech / Realtime.** A single model both *hears* audio and *speaks* back, over a persistent low-latency connection (WebSocket / WebRTC), keeping tone and interruption handling. This is what makes natural voice agents possible without stitching three services and eating their combined latency.
 
-The classic **pipeline architecture** chains them: microphone → STT → LLM (your normal [messages](messages-roles.md) call, often with [tools](function-tool-schemas.md)) → TTS → speaker. The **realtime architecture** collapses that into one model for lower latency but less control over each stage.
+The classic **pipeline architecture** chains them: microphone → STT → LLM (your normal [messages](/working-with-llm-apis/messages-roles) call, often with [tools](function-tool-schemas.md)) → TTS → speaker. The **realtime architecture** collapses that into one model for lower latency but less control over each stage.
 
 <div class="diagram">
   <div class="flow">

@@ -2,6 +2,8 @@
 
 **The one-line idea:** an LLM doesn't "write" an answer — it predicts a probability for every possible next token, and *sampling* is the set of knobs that decides which token you actually pick. Master these knobs and you control creativity, determinism, cost, and where the model stops.
 
+> **Continuing from the capstone.** You just built **HelpDesk** (v1–v8) — but every one of its `create()` calls used the model's *default* sampling. That's why its answers might feel slightly random, occasionally too long, or not deterministic enough for support. This node is where you learn the dials to fix exactly that: after it, you'll go back and set a low **temperature** on HelpDesk's support replies, a **max_tokens** cap to control cost, and a **stop sequence** so it never invents the customer's next line. Same app — now you tune it.
+
 ## Why we even need it
 
 Under the hood, every time an LLM produces a word it does the same thing: it looks at everything so far and outputs a **probability distribution** over its entire vocabulary — maybe 100,000+ possible next tokens, each with a score. "The cat sat on the ___" might give `mat` 60%, `floor` 15%, `roof` 8%, and a long tail of thousands of tiny probabilities.
@@ -42,7 +44,7 @@ Temperature, top-k, and top-p are three ways of shaping *the same* candidate dis
 
 ## Real world: how a company uses this
 
-> **A Dubai bank** running a customer-service assistant on Claude uses **temperature 0.2** so two customers asking the same question get consistent, on-policy answers; **max_tokens 300** so replies stay short and the bill stays predictable; a **stop sequence** of `"\n\nCustomer:"` so the model never hallucinates the customer's next turn; and **logprobs** on a separate intent-classifier call to route low-confidence queries to a human. Its marketing team, on the same model, runs **temperature 0.9, top_p 0.95** for ad-copy brainstorming. Same model, opposite dials — the sampling settings *are* the product difference.
+**Back to HelpDesk:** the exact settings your support assistant should use — **temperature 0.2** so two customers asking the same question get consistent, on-policy answers; **max_tokens 300** so replies stay short and the bill stays predictable; a **stop sequence** of `"\n\nCustomer:"` so the model never hallucinates the customer's next turn; and **logprobs** on a separate intent-classifier call to route low-confidence queries to a human. Contrast that with a **marketing brainstorm tool** on the *same* model running **temperature 0.9, top_p 0.95** for variety. Same model, opposite dials — the sampling settings *are* the product difference. When you finish this node, add these to HelpDesk's `create()` call.
 
 ## Interview tip
 
@@ -50,4 +52,4 @@ Say: *"Sampling parameters shape the model's next-token probability distribution
 
 ---
 
-*Below: deep-dive articles on each sampling knob.*
+*Below: deep-dive articles on each sampling knob. After this, go set them on HelpDesk — then the next node, **LLM APIs — Advanced**, adds the capabilities (tool-calling, vision, caching) your app reaches for as it grows.*
