@@ -2,7 +2,14 @@
 
 **The one-line idea:** temperature is a single number you pass to the API that controls how much randomness goes into the model's next-token choices — low means "always pick the safest word," high means "take wilder risks."
 
-> **Bridge from the node intro.** In the Sampling & Generation overview you learned that an LLM turns your prompt into a *probability distribution* over its entire vocabulary — maybe 100 000 tokens, each with a score — and that *sampling parameters* are the dials that decide which token actually gets picked. Temperature is the **first and most important** of those dials. It sits inside the softmax step you already saw in the LLM Internals node, so this tile will make that math feel real for the first time.
+> **Bridge from the node intro.** In the Sampling & Generation overview you learned that an LLM turns your prompt into a *probability distribution* over its entire vocabulary — maybe 100 000 tokens, each with a score — and that *sampling parameters* are the dials that decide which token actually gets picked. Temperature is the **first and most important** of those dials.
+
+**First, two words you'll see all through this node (no need to have read LLM Internals yet):**
+
+- **Logit** = the **raw score** the model gives each possible next word — just a number, higher = "I prefer this word here." It can be anything (e.g. `3.2`, `0.5`, `-4.0`) and the scores do *not* add up to 100%.
+- **Softmax** = the step that squashes that whole list of raw logits into **probabilities** — each 0–100%, all summing to 100%.
+
+So the pipeline is: **model → a logit (raw score) per word → softmax → probabilities → pick one.** Temperature is a dial you apply to the logits *just before* softmax, to make the resulting probabilities sharper or flatter. That's the only background you need; the full story of *how* the model produces those logits is the LLM Internals node you can read later.
 
 ## Why it matters for an AI Engineer
 
