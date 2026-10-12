@@ -45,7 +45,7 @@ export const roadmap: Entry[] = [
     { h: "Chat APIs", tiles: ["SDK setup & call pattern", "Messages & roles", "System / user / assistant", "Streaming", { t: "Usage & token counting", cls: "full" }] },
     { h: "Structured output", tiles: ["JSON mode"] },
   ] },
-  { node: "Build: The Capstone App", tag: "project · grows every phase", lead: "ONE real app you grow feature-by-feature as you learn — start with a basic call, add memory, streaming, cost, structure. Later phases turn it into RAG + agents.", groups: [
+  { node: "Build: The Capstone App", tag: "capstone · phase 1", lead: "Build and ship the HelpDesk foundation — basic chat, memory, streaming, cost, structured tickets, users, persistence, and deployment.", groups: [
     { h: "Part A · Grow it one feature at a time", tiles: ["v1 · Basic Q&A call", "v2 · Conversation memory", "v3 · Streaming + persona", "v4 · Token & cost tracking", "v5 · Structured output"] },
     { h: "Part B · Make it multi-user & production-ready", tiles: ["v6 · Auth & per-user history", "v7 · Redis & concurrency", "v8 · Deploy to production"] },
   ] },
@@ -57,6 +57,12 @@ export const roadmap: Entry[] = [
     { h: "Other endpoints", tiles: ["Embeddings API", "Batch API", "Files API", "SSE streaming"] },
     { h: "Hugging Face", tiles: ["transformers", "pipelines", "tokenizers", { t: "Inference API & Hub", cls: "full" }] },
     { h: "Production concerns", tiles: ["Rate limits", "Retries & backoff", "Async batching", { t: "Prompt caching", cls: "full" }] },
+  ] },
+  { node: "Build: The Capstone App — Phase 2", tag: "project · integration", lead: "Apply every advanced API lesson to the deployed HelpDesk app — tools, multimodal intake, semantic search, reliability, batch work, and open-model fallback.", groups: [
+    { h: "Establish the production contract", tiles: [{ t: "v8.1 · Production foundation", cls: "full" }] },
+    { h: "Add advanced capabilities", tiles: ["v9 · Tool calling & live order lookup", "v10 · Multimodal ticket intake", "v11 · Embeddings-powered similar tickets"] },
+    { h: "Harden and scale", tiles: ["v12 · Resilient provider client", "v13 · Async & batch processing", "v14 · Open-model fallback"] },
+    { h: "Ship the integrated release", tiles: [{ t: "v15 · Phase 2 integration & demo", cls: "full" }] },
   ] },
   { node: "Model Landscape", tag: "decision", lead: "Which model, and why", groups: [
     { h: "Foundation models", tiles: ["Closed vs open", "Model sizes", "Context length", "Multimodal"] },
@@ -75,6 +81,11 @@ export const roadmap: Entry[] = [
   { node: "Context Engineering", tag: "core skill", lead: "Manage what the model sees — the 2025-26 skill", groups: [
     { h: "Context sources", tiles: ["System instructions", "External memory", "RAG & dynamic filters", { t: "Tool results as context", cls: "full" }] },
     { h: "Managing the window", tiles: ["Long-context handling", "Context compaction", "Context isolation", "Summarization / pruning", { t: "Prompt & KV caching", cls: "full" }] },
+  ] },
+  { node: "Build: The Capstone App — Phase 3", tag: "project · prompt & context", lead: "Turn prompt and context engineering into a reliable HelpDesk control layer — versioned prompts, safe workflows, memory, compaction, and measured releases.", groups: [
+    { h: "Engineer the behavior", tiles: ["v16 · Versioned prompt library", "v17 · Few-shot structured triage", "v18 · Grounding, citations & guardrails", "v19 · Chained support workflow"] },
+    { h: "Engineer the context", tiles: ["v20 · External customer memory", "v21 · Context budget & compaction"] },
+    { h: "Ship the measured release", tiles: [{ t: "v22 · Prompt experiments & Phase 3 demo", cls: "full" }] },
   ] },
 
   { sec: "Phase 3 · RAG (deep dive)" },

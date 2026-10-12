@@ -13,7 +13,7 @@ An orchestrator models your pipeline as a **DAG** — a Directed Acyclic Graph. 
 On top of the DAG it gives you four things scripts don't:
 
 1. **Scheduling** — run the DAG on a cron ("daily at 2am") or trigger it on an event.
-2. **Retries & backoff** — a failed task retries N times with increasing delay before it's marked failed (see [Retries & backoff](../working-with-llm-apis/retries-backoff.md) for the same idea applied to API calls).
+2. **Retries & backoff** — a failed task retries N times with increasing delay before it's marked failed (see [Retries & backoff](../llm-apis-advanced/retries-backoff.md) for the same idea applied to API calls).
 3. **Observability** — a UI/logs showing which run succeeded, which task failed, and how long each took.
 4. **Backfills** — re-run the pipeline for past dates to fix or fill in history.
 

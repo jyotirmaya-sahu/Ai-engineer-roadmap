@@ -1,6 +1,6 @@
-# Build: The Capstone App
+# Build: The Capstone App — Phase 1
 
-**The one-line idea:** instead of throwaway demos, you build **one real app** and grow it feature-by-feature as you learn — a basic call, then memory, then streaming, then cost tracking, then structured output. Later phases (RAG, agents, deployment) keep extending the *same* app. By the end you have one portfolio project that proves the whole journey.
+**The one-line idea:** instead of throwaway demos, you build **one real app** and grow it feature-by-feature — from a basic call to a deployed, multi-user product. Phase 2 then extends the *same* app with the advanced API capabilities you learn next.
 
 ## Why we even need this — and why ONE app, not many
 
@@ -85,7 +85,7 @@ Same app, every phase. You're not restarting — you're shipping updates.
 | **[v7 · Redis & concurrency](build-the-capstone-app/v7-redis-concurrency.md)** | Redis cache-aside + per-user locking | caching pattern, concurrency safety |
 | **[v8 · Deploy to production](build-the-capstone-app/v8-deploy-to-production.md)** | live on the internet: Vercel + container + managed data | containers, secrets, prod CORS, health/rate-limit |
 
-Build them **strictly in order** — each starts from where the last ended.
+Build them **strictly in order** — each starts from where the last ended. After v8, complete **LLM APIs — Advanced**, then continue in [Capstone Phase 2](build-the-capstone-app-phase-2.md) with v9.
 
 ## How to work through it (the rules)
 
@@ -105,4 +105,4 @@ In a job you inherit a codebase and add features to it under real constraints �
 
 ---
 
-*Below: the five milestones. Build them into one repo, in order.*
+*Below: the eight Phase 1 milestones. Build them into one repo, in order; Phase 2 continues at v9.*
