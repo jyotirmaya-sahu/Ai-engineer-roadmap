@@ -21,7 +21,7 @@ export default function Home() {
       <div className="top">
         <h1>AI Engineer — Detailed Roadmap</h1>
         <p>
-          Every topic broken down concept-by-concept. <b>📖 Click any yellow node to read the full article.</b> · Dubai,
+          Every topic broken down concept-by-concept. <b>📖 Click any roadmap node to read the full article.</b> · Dubai,
           interview-ready by Aug 31
         </p>
       </div>
