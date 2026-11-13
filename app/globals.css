@@ -27,10 +27,12 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .plan-hero h1{max-width:720px;margin:0;font-size:clamp(42px,7vw,72px);font-weight:800;letter-spacing:-.055em;
   line-height:.98;text-wrap:balance}
 .plan-intro{max-width:600px;margin:20px 0 0;color:#b7b7b7;font-size:17px;line-height:1.6;text-wrap:pretty}
-.plan-goal{display:flex;align-items:center;gap:14px;width:max-content;max-width:100%;margin-top:30px;padding:12px 16px;
+.plan-goal{display:flex;align-items:center;justify-content:space-between;gap:30px;width:min(100%,600px);margin-top:30px;padding:12px 16px;
   border-left:3px solid var(--accent);background:#20242b;border-radius:0 8px 8px 0}
+.plan-goal>div{display:flex;align-items:center;gap:14px}
 .plan-goal span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .plan-goal strong{font-size:14px}
+.plan-goal b{color:#c8d4ee;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
 
 .plan-shell{max-width:980px;margin:0 auto;padding:0 24px 100px}
 .plan-timeline{position:relative}
@@ -53,8 +55,17 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .plan-tasks>li{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;padding:10px 0;border-top:1px solid #303030}
 .plan-tasks>li:first-child{padding-top:0;border-top:0}
 .plan-tasks>li:last-child{padding-bottom:0}
-.task-check{width:14px;height:14px;margin-top:3px;border:1.5px solid #667085;border-radius:4px;background:#292d34}
+.task-check{appearance:none;width:15px;height:15px;margin:3px 0 0;border:1.5px solid #667085;border-radius:4px;background:#292d34;
+  cursor:pointer;display:grid;place-content:center;transition:background .15s ease,border-color .15s ease,transform .15s ease}
+.task-check::before{content:"";width:7px;height:4px;border-left:2px solid #f5f7fb;border-bottom:2px solid #f5f7fb;
+  transform:rotate(-45deg) scale(0);transition:transform .12s ease}
+.task-check:hover{border-color:#98a9c9;transform:scale(1.06)}
+.task-check:checked{background:#6479a4;border-color:#8295bb}
+.task-check:checked::before{transform:rotate(-45deg) scale(1)}
+.task-check:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .plan-tasks strong{font-size:14.5px;font-weight:650;line-height:1.45}
+.task-complete>div>strong{color:#898f99;text-decoration:line-through;text-decoration-thickness:1px}
+.task-complete>div>ul{opacity:.55}
 .plan-tasks ul{margin-top:7px}
 .plan-tasks ul li{position:relative;margin:4px 0;padding-left:14px;color:var(--muted);font-size:13px;line-height:1.45}
 .plan-tasks ul li::before{content:"";position:absolute;left:1px;top:.65em;width:4px;height:4px;border-radius:50%;background:#65728a}
@@ -125,7 +136,8 @@ a.tile:active{transform:translateY(0) scale(.99)}
   .plan-hero{padding:28px 18px 34px}
   .plan-hero .site-tabs{margin-bottom:30px}
   .plan-hero h1{font-size:42px}
-  .plan-goal{align-items:flex-start;flex-direction:column;gap:4px;width:100%}
+  .plan-goal{align-items:flex-start;flex-direction:column;gap:8px;width:100%}
+  .plan-goal>div{align-items:flex-start;flex-direction:column;gap:4px}
   .plan-shell{padding:0 18px 70px}
   .plan-timeline::before{left:5px}
   .plan-day{display:block;padding:0 0 18px 26px}

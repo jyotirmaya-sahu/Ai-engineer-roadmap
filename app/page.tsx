@@ -117,10 +117,27 @@ const sprintDays: SprintDay[] = [
 
 export default function Home() {
   const [today, setToday] = useState("");
+  const [completed, setCompleted] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     setToday(new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Dubai" }).format(new Date()));
+    try {
+      setCompleted(JSON.parse(localStorage.getItem("ai-roadmap-progress") || "{}"));
+    } catch {
+      setCompleted({});
+    }
   }, []);
+
+  const toggleTask = (taskId: string) => {
+    setCompleted((current) => {
+      const next = { ...current, [taskId]: !current[taskId] };
+      localStorage.setItem("ai-roadmap-progress", JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const totalTasks = sprintDays.reduce((total, day) => total + day.tasks.length, 0);
+  const completedTasks = Object.values(completed).filter(Boolean).length;
 
   return (
     <>
@@ -132,8 +149,11 @@ export default function Home() {
           Follow the work in order. Learn the concept, build the project, then move to the next day.
         </p>
         <div className="plan-goal">
-          <span>Target</span>
-          <strong>Interview-ready by 25 November</strong>
+          <div>
+            <span>Target</span>
+            <strong>Interview-ready by 25 November</strong>
+          </div>
+          <b>{completedTasks}/{totalTasks} done</b>
         </div>
       </header>
 
@@ -151,9 +171,18 @@ export default function Home() {
                   {day.milestone && <div className="milestone">{day.milestone}</div>}
                   <h2>{day.focus}</h2>
                   <ul className="plan-tasks">
-                    {day.tasks.map((task) => (
-                      <li key={task.title}>
-                        <span className="task-check" aria-hidden="true" />
+                    {day.tasks.map((task, taskIndex) => {
+                      const taskId = `${day.date}-${taskIndex}`;
+                      const isComplete = Boolean(completed[taskId]);
+                      return (
+                      <li className={isComplete ? "task-complete" : ""} key={task.title}>
+                        <input
+                          className="task-check"
+                          type="checkbox"
+                          checked={isComplete}
+                          onChange={() => toggleTask(taskId)}
+                          aria-label={`Mark ${task.title} as ${isComplete ? "not done" : "done"}`}
+                        />
                         <div>
                           <strong>{task.title}</strong>
                           {task.details && (
@@ -165,7 +194,8 @@ export default function Home() {
                           )}
                         </div>
                       </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 </div>
               </section>
