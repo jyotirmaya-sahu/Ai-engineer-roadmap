@@ -49,7 +49,7 @@ export default function LearnPage({ params }: { params: { node: string; topic: s
   return (
     <>
       <div className="abar">
-        <Link href="/">← Roadmap</Link>
+        <Link href="/roadmap">← Roadmap</Link>
         {node && (
           <>
             <span className="crumb">·</span>

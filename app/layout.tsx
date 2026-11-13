@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "AI Engineer Roadmap",
-  description: "Detailed, click-to-read AI Engineer roadmap — Dubai, by Aug 31",
+  description: "Daily AI Engineer sprint and detailed learning roadmap for Dubai roles",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

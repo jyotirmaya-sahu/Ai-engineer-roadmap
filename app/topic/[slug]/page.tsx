@@ -26,7 +26,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="abar">
-        <Link href="/">← Back to roadmap</Link>
+        <Link href="/roadmap">← Back to roadmap</Link>
         <span className="crumb">{title}</span>
       </div>
       <article className="prose">
